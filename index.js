@@ -2,7 +2,7 @@
 let TuringContract;
 
 // 2. Set contract address and ABI
-const Turing_Contract_Address = "0x01fe9DdD4916019beC6268724189B2EED8C2D49a";//"0x7163712260fe887582D71ef8F77d668B1e05F1e9";
+const Turing_Contract_Address = "0x24b5fC86691d13857E09bda58042a1F9212f29e4";//"0x7163712260fe887582D71ef8F77d668B1e05F1e9";
 const Turing_Contract_ABI =[
 	{
 		"inputs": [],
@@ -380,7 +380,7 @@ const vote = () => {
       .catch((err) => {
         // If error occurs, display error message
         setVoteButton.value = "Vote";
-        alert("Error setting pet details " + err.message);
+        alert("YOU CAN'T VOTE FOR THIS PERSON ");
       });
 }
 
