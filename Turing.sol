@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 
 contract Turing is ERC20{
-    address professora =0x01fe9DdD4916019beC6268724189B2EED8C2D49a;// 0xA5095296F7fF9Bdb01c22e3E0aC974C8963378ad;
+    address professora =0xA5095296F7fF9Bdb01c22e3E0aC974C8963378ad;
 
     mapping(string => address)          map;
     mapping(string => bool)             allowed;
@@ -131,11 +131,11 @@ contract Turing is ERC20{
     function vote(string calldata codinome, uint256 amount) public votation  validSender notSelf(codinome)
         maximumAmount(amount){
             address receiver=map[codinome];
-            if( allowed[codinome]){
-                _mint(receiver,amount);
-                allowed[codinome]=false;
-                _mint(msg.sender,0.2*10**18);
-            }
+            require(allowed[codinome],"Can't vote this person anymore");
+            _mint(receiver,amount);
+            allowed[codinome]=false;
+            _mint(msg.sender,0.2*10**18);
+            
     }
     function endVoting() public onlyProfessora{
         voting = false;

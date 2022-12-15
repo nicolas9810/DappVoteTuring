@@ -2,7 +2,7 @@
 let TuringContract;
 
 // 2. Set contract address and ABI
-const Turing_Contract_Address = "0xf04e702FAFA3686D015AdAC7c4213FBec86A5173";
+const Turing_Contract_Address ="0xf04e702FAFA3686D015AdAC7c4213FBec86A5173"
 const Turing_Contract_ABI =[
 	{
 		"anonymous": false,
@@ -326,6 +326,7 @@ const Turing_Contract_ABI =[
 
 
 
+
 /* 3. Prompt user to sign in to MetaMask */
 const provider = new ethers.providers.Web3Provider(window.ethereum, "goerli");
 provider.send("eth_requestAccounts", []).then(() => {
@@ -344,40 +345,43 @@ provider.send("eth_requestAccounts", []).then(() => {
 
 
 // 4. Creating variables for reusable dom elements
-const setVoteButton = document.querySelector("#vote");
+const setEndVoteButton = document.querySelector("#end");
+const issueTokenButton = document.querySelector("#token");
 
-const vote = () => {
-  let codinomeInput = document.querySelector("#codinome");
-  let turingInput = document.querySelector("#turing-amount");
-  codinome = codinomeInput.value;
-  let mul=Math.pow(10,18);
-  turing = turingInput.value;
-  if(turing > 2){
-	window.alert(" Voçe nao pode dar mais de 2 turing como voto")
-	return;
-  }
-  if(turing<0.000000000000000001){
-	alert(" o valor introduzido é pequeno demais ");
-	return;
-  }
-  setVoteButton.value = "Voting...";
-  console.log(turing);
-  turing=BigInt(turing*mul);
-  console.log(turing);
 
-  TuringContract.vote(codinome,turing)
-      .then(() => {
-        codinomeInput="";
-        turingInput="";
+const issueToken = () => {
+	let addressInput = document.querySelector("#codinome");
+	let amountInput = document.querySelector("#amount");
+    address = addressInput.value;
+    amount=amountInput.value;
+    console.log(address);
+	issueTokenButton.value = "Issuing...";
 
-        setVoteButton.value="Vote";
-        //getCurrentBalance();
+	TuringContract.issueToken(address,amount)
+		.then(() => {
+			issueTokenButton.value = "Issue Token";
 
+		})
+		.catch((err) => {
+			alert("you can't issue a token");
+	        issueTokenButton.value = "Issue token";
+
+		})
+	
+}
+ issueTokenButton.addEventListener("click",issueToken);
+
+
+const endVoting = () => {
+	TuringContract.endVoting().then(() => {
+		setEndVoteButton.value="Votation closed";
+		setEndVoteButton.style.backgroundColor="grey";
+		document.querySelector('#end').disabled = true;
+		document.querySelector('#vote').disabled = true;
       })
       .catch((err) => {
-        // If error occurs, display error message
-        setVoteButton.value = "Vote";
-        alert("YOU CAN'T VOTE FOR THIS PERSON ");
+            alert("Cannot close the votation");
       });
+	
 }
-setVoteButton.addEventListener("click", vote);
+setEndVoteButton.addEventListener("click", endVoting);

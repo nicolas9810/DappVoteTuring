@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="shortcut icon" href="#">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,13 @@
     <link rel="stylesheet" href="./index.css" />
     <title>Turing Vote</title>
   </head>
+
+  <ul>
+    <li><a href="index.html">User</a></li>
+    <li><a href="admin.html">admin</a></li>
+  </ul> 
+
+
   <body background="imgs/test.jpg"></body>
     <section class="form-section">
       <section class="section-header">
@@ -18,7 +26,8 @@
         <label for="codinome">Codinome</label>
         <select id="codinome" name="codinome">
           <option value="Andre">Andre</option>
-          <option value="Ratonilo">Antonio</option>
+          <option value="Antonio">Antonio</option>
+          <option value="Ratonilo">Ratonilo</option>
           <option value="eduardo">eduardo</option>
           <option value="Enzo">Enzo</option>
           <option value="Fernando">Fernando</option>
@@ -41,7 +50,7 @@
         <label for="turing-amount">Turing</label>
         <input type="number" id="turing-amount"  step="0.000000000000000001" name="turing-amount"  max="2"/>
         <input type="button" value="Vote" id="vote" />
-        <input type="button" value="End Votation" id="end" />
+        <!-- <input type="button" value="End Votation" id="end" /> -->
       </form>
     </section>
 
